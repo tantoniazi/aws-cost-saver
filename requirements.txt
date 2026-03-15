@@ -1,0 +1,4 @@
+# aws-cost-saver dependencies
+# boto3 is included in AWS Lambda Python runtimes
+boto3>=1.34.0
+PyYAML>=6.0

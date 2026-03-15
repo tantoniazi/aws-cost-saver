@@ -1,0 +1,61 @@
+# aws-cost-saver environment configuration
+# Use this file to define which resources to start/stop per environment.
+# Tag resources with Environment=<env_name> for discovery, or list explicitly.
+
+default:
+  schedule:
+    stop: "19:00"   # UTC
+    start: "07:00"  # UTC
+
+dev:
+  rds:
+    - dev-database
+  ecs:
+    cluster: dev-cluster
+    services:
+      - api
+      - workers
+  ec2:
+    - dev-runner
+    - dev-bastion
+  asg: []
+  schedule:
+    stop: "19:00"
+    start: "07:00"
+
+staging:
+  rds:
+    - staging-database
+  ecs:
+    cluster: staging-cluster
+    services:
+      - api
+      - workers
+  ec2: []
+  asg:
+    - staging-asg
+  schedule:
+    stop: "20:00"
+    start: "06:00"
+
+training:
+  rds:
+    - training-db
+  ecs:
+    cluster: training-cluster
+    services:
+      - api
+  ec2:
+    - training-runner
+  asg: []
+  schedule:
+    stop: "18:00"
+    start: "08:00"
+
+# Production is listed for reference only - cost-saver will NEVER auto-stop prod
+# when safety checks are enabled (Environment=production or cost-saver=false)
+# prod:
+#   rds: []
+#   ecs: {}
+#   ec2: []
+#   asg: []

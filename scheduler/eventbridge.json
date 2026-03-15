@@ -1,0 +1,26 @@
+{
+  "description": "EventBridge rules for aws-cost-saver (reference for manual setup)",
+  "start_rule": {
+    "Name": "aws-cost-saver-start",
+    "ScheduleExpression": "cron(0 7 * * ? *)",
+    "State": "ENABLED",
+    "Description": "Trigger start at 07:00 UTC daily"
+  },
+  "stop_rule": {
+    "Name": "aws-cost-saver-stop",
+    "ScheduleExpression": "cron(0 19 * * ? *)",
+    "State": "ENABLED",
+    "Description": "Trigger stop at 19:00 UTC daily"
+  },
+  "target": {
+    "Id": "CostSaverLambda",
+    "Arn": "${lambda_function_arn}",
+    "Input": "{\"action\": \"start\"} or {\"action\": \"stop\"}"
+  },
+  "manual_setup": [
+    "Create rule: aws-cost-saver-start with cron(0 7 * * ? *)",
+    "Create rule: aws-cost-saver-stop with cron(0 19 * * ? *)",
+    "Add Lambda as target with input {\"action\": \"start\"} or {\"action\": \"stop\"}",
+    "Grant events.amazonaws.com permission to invoke the Lambda"
+  ]
+}

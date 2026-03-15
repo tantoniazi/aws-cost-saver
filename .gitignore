@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Terraform
+terraform/.terraform/
+terraform/*.zip
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# IDE / env
+.idea/
+.cursor/
+.env
+*.log
+
+# Test
+.pytest_cache/
+.coverage
+htmlcov/
